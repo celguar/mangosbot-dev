@@ -76,10 +76,13 @@ public:
     bool deleteRandomBotAccounts;
     uint32 randomBotGuildCount;
     bool deleteRandomBotGuilds;
+    uint32 randomBotArenaTeamCount;     //arena
+    bool deleteRandomBotArenaTeams;     //arena
+    std::list<uint32> randomBotArenaTeams;     //arena
 	bool RandombotsWalkingRPG;
 	bool RandombotsWalkingRPGInDoors;
     std::list<uint32> randomBotGuilds;
-	std::list<uint32> pvpProhibitedZoneIds;
+	 std::list<uint32> pvpProhibitedZoneIds;
     bool enableGreet;
     bool randomBotShowHelmet;
     bool randomBotShowCloak;
