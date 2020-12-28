@@ -47,6 +47,11 @@ file(GLOB Playerbot_Strategy ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/*.cp
 file(GLOB Playerbot_Actions ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/actions/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/actions/*.h)
     source_group("Player Bot\\Strategies\\Actions" FILES ${Playerbot_Actions})
     LIST(APPEND LIBRARY_SRCS ${Playerbot_Actions})
+	 
+#Tactics files
+file(GLOB Playerbot_Tactics ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/tactics/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/tactics/*.h)
+    source_group("Player Bot\\Strategies\\Tactics" FILES ${Playerbot_Tactics})
+    LIST(APPEND LIBRARY_SRCS ${Playerbot_Tactics})
 
 #Generic files
 file(GLOB Playerbot_Generic ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/generic/*.cpp ${CMAKE_CURRENT_SOURCE_DIR}/playerbot/strategy/generic/*.h)
