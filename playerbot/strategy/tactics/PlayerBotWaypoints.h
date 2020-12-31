@@ -1,5 +1,5 @@
-#ifndef MANGOS_BattleBotWaypoints_H
-#define MANGOS_BattleBotWaypoints_H
+#ifndef MANGOS_PlayerbotWaypoints_H
+#define MANGOS_PlayerbotWaypoints_H
 
 #include "SharedDefines.h"
 
@@ -27,23 +27,23 @@ Position const AB_WAITING_POS_ALLIANCE = { 1286.054f, 1282.500f, -15.697f, 3.95f
 Position const AV_WAITING_POS_HORDE = { -871.196f, -558.407f, 57.239f, 2.14f };
 Position const AV_WAITING_POS_ALLIANCE = { 793.627f, -493.814f, 99.689f, 3.09f };
 
-class BattleBotAI;
-typedef void(*BattleBotWaypointFunc) (BattleBotAI* pAI);
+class PlayerbotAI;
+typedef void(*PlayerbotWaypointFunc) (PlayerbotAI* ai);
 
-struct BattleBotWaypoint
+struct PlayerbotWaypoint
 {
-    BattleBotWaypoint(float x_, float y_, float z_, BattleBotWaypointFunc func) :
+    PlayerbotWaypoint(float x_, float y_, float z_, PlayerbotWaypointFunc func) :
         x(x_), y(y_), z(z_), pFunc(func) {};
     float x = 0.0f;
     float y = 0.0f;
     float z = 0.0f;
-    BattleBotWaypointFunc pFunc = nullptr;
+    PlayerbotWaypointFunc pFunc = nullptr;
 };
 
-typedef std::vector<BattleBotWaypoint> BattleBotPath;
+typedef std::vector<PlayerbotWaypoint> PlayerbotPath;
 
-extern std::vector<BattleBotPath*> const vPaths_WS;
-extern std::vector<BattleBotPath*> const vPaths_AB;
-extern std::vector<BattleBotPath*> const vPaths_AV;
+extern std::vector<PlayerbotPath*> const vPaths_WS;
+extern std::vector<PlayerbotPath*> const vPaths_AB;
+extern std::vector<PlayerbotPath*> const vPaths_AV;
 
 #endif

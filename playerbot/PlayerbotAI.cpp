@@ -2560,3 +2560,51 @@ uint32 PlayerbotAI::GetBuffedCount(Player* player, string spellname)
     }
     return 0;
 }
+
+void PlayerbotAI::UpdateWaypointMovement()
+{
+    // We already have a path.
+    if (m_currentPath)
+        return;
+
+    if (bot->isMoving())
+        return;
+
+    if (!bot->IsStopped())
+        return;
+
+    if (bot->IsInCombat())
+        return;
+
+    if (bot->hasUnitState(UNIT_STAT_CAN_NOT_MOVE))
+        return;
+
+    switch (bot->GetMotionMaster()->GetCurrentMovementGeneratorType())
+    {
+    case IDLE_MOTION_TYPE:
+    case CHASE_MOTION_TYPE:
+    case POINT_MOTION_TYPE:
+        break;
+    default:
+        return;
+    }
+
+    if (BattleGround* bg = bot->GetBattleGround())
+        if (bg->GetStatus() == STATUS_WAIT_JOIN)
+            return;
+
+    if (StartNewPathToObjective())
+        return;
+
+    if (StartNewPathFromBeginning())
+        return;
+
+    StartNewPathFromAnywhere();
+}
+
+void PlayerbotAI::StopMoving()
+{
+    bot->StopMoving();
+    bot->GetMotionMaster()->Clear();
+    bot->GetMotionMaster()->MoveIdle();
+}

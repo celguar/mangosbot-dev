@@ -9,6 +9,7 @@
 #include "ChatFilter.h"
 #include "PlayerbotSecurity.h"
 #include <stack>
+#include "../playerbot/strategy/tactics/PlayerBotWaypoints.h"
 
 class Player;
 class PlayerbotMgr;
@@ -18,6 +19,19 @@ using namespace std;
 using namespace ai;
 
 bool IsAlliance(uint8 race);
+
+enum BattleBotWsgWaitSpot
+{
+    BB_WSG_WAIT_SPOT_SPAWN,
+    BB_WSG_WAIT_SPOT_LEFT,
+    BB_WSG_WAIT_SPOT_RIGHT
+};
+
+enum FlagSpellsWS
+{
+    AURA_WARSONG_FLAG = 23333,
+    AURA_SILVERWING_FLAG = 23335
+};
 
 class PlayerbotChatHandler: protected ChatHandler
 {
@@ -316,7 +330,23 @@ public:
     bool HasSkill(SkillType skill);
     bool IsAllowedCommand(string text);
     float GetRange(string type);
-    
+    // Movement System
+    void UpdateWaypointMovement();
+    void MovementInform(uint32 movementType, uint32 data);
+    //void DoGraveyardJump();
+    void MoveToNextPoint();
+    bool StartNewPathFromBeginning();
+    void StartNewPathFromAnywhere();
+    bool StartNewPathToPosition(Position const& targetPosition, std::vector<PlayerbotPath*> const& vPaths);
+    bool StartNewPathToObjective();
+    //bool StartNewPathToPosition(Position const& position, std::vector<PlayerbotPath*> const& vPaths);
+    void ClearPath();
+    void StopMoving();
+    bool m_doingGraveyardJump = false;
+    bool m_movingInReverse = false;
+    uint32 m_currentPoint = 0;
+    PlayerbotPath* m_currentPath = nullptr;
+    uint8 m_waitingSpot = BB_WSG_WAIT_SPOT_SPAWN;
 private:
     void _fillGearScoreData(Player *player, Item* item, std::vector<uint32>* gearScore, uint32& twoHandScore);
     bool IsTellAllowed(PlayerbotSecurityLevel securityLevel = PLAYERBOT_SECURITY_ALLOW_ALL);

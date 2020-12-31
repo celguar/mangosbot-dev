@@ -28,6 +28,7 @@ int strcmpi(std::string s1, std::string s2);
 #include "ChatHelper.h"
 #include "PlayerbotAI.h"
 #include "PlayerbotDbStore.h"
+#include "../playerbot/strategy/tactics/PlayerBotWaypoints.h"
 
 #if MAX_EXPANSION == 1
     #define MANGOSBOT_ONE
